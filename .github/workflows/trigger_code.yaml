@@ -38,7 +38,7 @@ jobs:
 
     # Upload logs to GitHub artifacts (optional step for storing logs in GitHub)
     - name: Upload log file
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: streamlit-logs
         path: streamlit_log.txt
