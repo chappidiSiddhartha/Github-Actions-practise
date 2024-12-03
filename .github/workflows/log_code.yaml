@@ -1,0 +1,40 @@
+name: Daily Streamlit App Run
+
+on:
+  schedule:
+    # This cron expression will trigger the workflow at 5 PM UTC every day
+    - cron: '0 17 * * *'
+
+jobs:
+  run_streamlit:
+    runs-on: ubuntu-latest
+    
+    steps:
+    # Checkout the repository
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    # Setting up Python environment
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+
+    # Installing dependencies (assuming you have a requirements.txt)
+    - name: Install dependencies
+      run: |
+        pip install --upgrade pip
+        pip install -r requirements.txt
+
+    # Run the Streamlit app and store logs
+    - name: Run Streamlit app
+      run: |
+        # Run the Streamlit app in the background and capture the logs in a file
+        nohup streamlit run your_script.py > streamlit_log.txt 2>&1 &
+
+    # Upload logs to GitHub artifacts (optional step for storing logs in GitHub)
+    - name: Upload log file
+      uses: actions/upload-artifact@v2
+      with:
+        name: streamlit-logs
+        path: streamlit_log.txt
