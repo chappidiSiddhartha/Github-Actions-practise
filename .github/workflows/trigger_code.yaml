@@ -1,6 +1,10 @@
 name: Daily Streamlit App Run
 
 on:
+  # Trigger the workflow on push events (to main or any branch you want)
+  push:
+    branches:
+      - main  # or the branch you want to trigger on push
   schedule:
     # This cron expression will trigger the workflow at 5 PM UTC every day
     - cron: '0 17 * * *'
