@@ -11,7 +11,7 @@ def load_data():
 # Function to transform data
 def transform_data(df):
     # Convert the 'Date' column to datetime format
-    df['Date'] = pd.to_datetime(df['Date'])
+    df['Date'] = pd.to_datetime(df['Date'],errors='coerce')
     
     # Extract Year and Month from the Date column
     df['Year'] = df['Date'].dt.year
