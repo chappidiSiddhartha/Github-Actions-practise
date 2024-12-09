@@ -9,14 +9,14 @@ schedules:
     branches:
       include:
         - main
-    always: true
+    always: true  # Always run the schedule even if there are no code changes
 
 pool:
   vmImage: 'ubuntu-latest'
 
 jobs:
 - job: RunStreamlit
-  displayName: Run Streamlit App Daily
+  displayName: Run Streamlit App
 
   steps:
     # Checkout the repository
@@ -47,3 +47,4 @@ jobs:
       inputs:
         targetPath: streamlit_log.txt
         artifactName: streamlit-logs
+
