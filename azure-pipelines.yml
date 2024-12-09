@@ -20,14 +20,13 @@ jobs:
 
   steps:
     # Checkout the repository
-    - task: Checkout@1
-      displayName: Checkout Code
+    - checkout: self  # Simplified checkout task
 
     # Setting up Python environment
     - task: UsePythonVersion@0
-      displayName: Set up Python 3.8
+      displayName: Set up Python 3.x
       inputs:
-        versionSpec: '3.8'
+        versionSpec: '3.8'  # Use Python 3.x
         addToPath: true
 
     # Installing dependencies
@@ -38,13 +37,12 @@ jobs:
 
     # Run the Streamlit app and store logs
     - script: |
-        nohup streamlit run your_script.py > streamlit_log.txt 2>&1 &
+        nohup streamlit run app.py > streamlit_log.txt 2>&1 &
       displayName: Run Streamlit App
 
-    # Publish logs to pipeline artifacts (optional)
+    # Publish logs to pipeline artifacts
     - task: PublishPipelineArtifact@1
       displayName: Upload Streamlit Log File
       inputs:
         targetPath: streamlit_log.txt
         artifactName: streamlit-logs
-
